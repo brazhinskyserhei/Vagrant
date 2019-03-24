@@ -172,5 +172,5 @@ exit
 sudo systemctl restart mariadb.service
 
 
-
+https://websiteforstudents.com/install-nginx-mariadb-and-php-7-2-fpm-with-phpmyadmin-on-ubuntu-16-04-18-04-18-10-lemp-phpmyadmin/
 
