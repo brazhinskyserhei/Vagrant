@@ -85,60 +85,15 @@ composer create-project --prefer-dist laravel/laravel blog
 ```
 
 ## 4.6 Site settings
-```
-sudo nano /etc/nginx/snippets/phpmyadmin.conf
-```
 
-```
-location /phpmyadmin {
-    root /usr/share/;
-    index index.php index.html index.htm;
-    location ~ ^/phpmyadmin/(.+\.php)$ {
-        try_files $uri =404;
-        root /usr/share/;
-        fastcgi_pass unix:/run/php/php7.2-fpm.sock;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        include /etc/nginx/fastcgi_params;
-    }
-
-    location ~* ^/phpmyadmin/(.+\.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt))$ {
-        root /usr/share/;
-    }
-}
-```
-
-## For Laravel
+### For Laravel
 ```
 sudo nano /etc/nginx/snippets/default
 ```
 
-## 4.5 Install phpMyAdmin
 ```
-sudo apt install phpmyadmin
-sudo nano /etc/nginx/snippets/phpmyadmin.conf
-```
-
-```
-location / phpmyadmin {
-    root / usr / share /;
-    index index.php index.html index.htm;
-    location ~ ^ / phpmyadmin / (. + \. php) $ {
-        try_files $ uri = 404;
-        root / usr / share /;
-        fastcgi_pass unix: /run/php/php7.2-fpm.sock;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $ document_root $ fastcgi_script_name;
-        include / etc / nginx / fastcgi_params;
-    }
-
-    location ~ * ^ / phpmyadmin / (. + \. (jpg | jpeg | gif | css | png | js | ico | html | xml | txt)) $ {
-        root / usr / share /;
-    }
-}
-```
-
 sudo nano /etc/nginx/sites-available/example.com.conf
+```
 ```
 server {
     listen 80;
@@ -171,6 +126,31 @@ sudo systemctl restart nginx.service
 sudo systemctl restart php7.2-fpm.service
 ```
 
+## 4.5 Install phpMyAdmin
+```
+sudo apt install phpmyadmin
+sudo nano /etc/nginx/snippets/phpmyadmin.conf
+```
+
+```
+location / phpmyadmin {
+    root / usr / share /;
+    index index.php index.html index.htm;
+    location ~ ^ / phpmyadmin / (. + \. php) $ {
+        try_files $ uri = 404;
+        root / usr / share /;
+        fastcgi_pass unix: /run/php/php7.2-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $ document_root $ fastcgi_script_name;
+        include / etc / nginx / fastcgi_params;
+    }
+
+    location ~ * ^ / phpmyadmin / (. + \. (jpg | jpeg | gif | css | png | js | ico | html | xml | txt)) $ {
+        root / usr / share /;
+    }
+}
+```
+
 ## 4.6 Connecting to phpMyAdmin
 
 http://example.com/phpmyadmin
@@ -183,7 +163,9 @@ flush privileges;
 exit
 
 sudo systemctl restart mariadb.service
-
+```
+## 4.6 Instructions site
+```
 https://websiteforstudents.com/install-nginx-mariadb-and-php-7-2-fpm-with-phpmyadmin-on-ubuntu-16-04-18-04-18-10-lemp-phpmyadmin/
 ```
 
