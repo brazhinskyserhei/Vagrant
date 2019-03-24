@@ -27,6 +27,7 @@ sudo apt-get install -y nginx
 sudo systemctl stop nginx.service
 sudo systemctl start nginx.service
 sudo systemctl enable nginx.service
+sudo systemctl reload nginx.service
 
 4.3 Install mysql
 
@@ -77,6 +78,32 @@ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 composer create-project --prefer-dist laravel/laravel blog
 
+4.6 Site settings
+
+sudo nano /etc/nginx/snippets/phpmyadmin.conf
+
+location /phpmyadmin {
+    root /usr/share/;
+    index index.php index.html index.htm;
+    location ~ ^/phpmyadmin/(.+\.php)$ {
+        try_files $uri =404;
+        root /usr/share/;
+        fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include /etc/nginx/fastcgi_params;
+    }
+
+    location ~* ^/phpmyadmin/(.+\.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt))$ {
+        root /usr/share/;
+    }
+}
+
+
+For Laravel
+
+sudo nano /etc/nginx/snippets/default
+
 4.5 Install phpMyAdmin
 
 sudo apt install phpmyadmin
@@ -99,9 +126,50 @@ location / phpmyadmin {
     }
 }
 
-4.6 Site settings
 
+sudo nano /etc/nginx/sites-available/example.com.conf
 
+server {
+    listen 80;
+    listen [::]:80;
+    root /var/www/html/example.com;
+    index  index.php index.html index.htm;
+    server_name  example.com www.example.com;
+
+     client_max_body_size 100M;
+
+     autoindex off;
+  
+     location / {
+        try_files $uri $uri/ /index.php?$query_string;
+      }
+
+    location ~ \.php$ {
+         include snippets/fastcgi-php.conf;
+         fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+         include fastcgi_params;
+    }
+
+   include snippets/phpmyadmin.conf;
+}
+
+sudo ln -s /etc/nginx/sites-available/example.com.conf /etc/nginx/sites-enabled/
+sudo systemctl restart nginx.service
+sudo systemctl restart php7.2-fpm.service
+
+4.6 Connecting to phpMyAdmin
+
+http://example.com/phpmyadmin
+
+sudo mysql -u root
+
+use mysql;
+update user set plugin='' where User='root';
+flush privileges;
+exit
+
+sudo systemctl restart mariadb.service
 
 
 
