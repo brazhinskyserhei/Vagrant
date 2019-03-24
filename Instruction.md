@@ -4,23 +4,23 @@ sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install virtualbox
 
-2. Install Vagrant
+# 2. Install Vagrant
 
 sudo apt-get install vagrant
 
-3. Start Vagrant
+# 3. Start Vagrant
 
 vagrant init
 vagrant up
 
-4.Install development environment
+# 4.Install development environment
 
-4.1 Install repository
+## 4.1 Install repository
 
 sudo add-apt-repository -y ppa:ondrej/php
 sudo apt-get update -y
 
-4.2 Install nginx
+## 4.2 Install nginx
 
 sudo apt-get install -y nginx
 
@@ -29,7 +29,7 @@ sudo systemctl start nginx.service
 sudo systemctl enable nginx.service
 sudo systemctl reload nginx.service
 
-4.3 Install mysql
+## 4.3 Install mysql
 
 sudo apt-get install mariadb-server mariadb-client
 
@@ -49,7 +49,7 @@ sudo mysql_secure_installation
 
 sudo mysql -u root -p
 
-4.4 Install PHP 7.2-FPM and Related Modules
+## 4.4 Install PHP 7.2-FPM and Related Modules
 
 sudo apt-get install software-properties-common
 sudo apt update
@@ -65,20 +65,20 @@ upload_max_filesize = 100M
 max_execution_time = 360
 date.timezone = America/Chicago
 
-4.6 Install unzip
+## 4.6 Install unzip
 
 sudo apt-get install git unzip
 
-4.7 Install Composer
+## 4.7 Install Composer
 
 curl -sS https://getcomposer.org/installer -o composer-setup.php
 sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
-4.8 Install Laravel
+## 4.8 Install Laravel
 
 composer create-project --prefer-dist laravel/laravel blog
 
-4.6 Site settings
+## 4.6 Site settings
 
 sudo nano /etc/nginx/snippets/phpmyadmin.conf
 
@@ -100,11 +100,11 @@ location /phpmyadmin {
 }
 
 
-For Laravel
+## For Laravel
 
 sudo nano /etc/nginx/snippets/default
 
-4.5 Install phpMyAdmin
+## 4.5 Install phpMyAdmin
 
 sudo apt install phpmyadmin
 sudo nano /etc/nginx/snippets/phpmyadmin.conf
@@ -158,7 +158,7 @@ sudo ln -s /etc/nginx/sites-available/example.com.conf /etc/nginx/sites-enabled/
 sudo systemctl restart nginx.service
 sudo systemctl restart php7.2-fpm.service
 
-4.6 Connecting to phpMyAdmin
+## 4.6 Connecting to phpMyAdmin
 
 http://example.com/phpmyadmin
 
@@ -170,7 +170,6 @@ flush privileges;
 exit
 
 sudo systemctl restart mariadb.service
-
 
 https://websiteforstudents.com/install-nginx-mariadb-and-php-7-2-fpm-with-phpmyadmin-on-ubuntu-16-04-18-04-18-10-lemp-phpmyadmin/
 
