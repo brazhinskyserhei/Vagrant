@@ -1,4 +1,4 @@
-1. Install virtual box
+# 1. Install virtual box
 
 sudo apt-get update
 sudo apt-get upgrade
