@@ -88,7 +88,7 @@ composer create-project --prefer-dist laravel/laravel blog
 
 ### For Laravel
 ```
-sudo nano /etc/nginx/snippets/default
+sudo nano /etc/nginx/sites-available/default
 ```
 
 ```
