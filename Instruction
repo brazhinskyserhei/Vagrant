@@ -1,0 +1,14 @@
+1. Install virtual box
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install virtualbox
+
+2. Install Vagrant
+
+sudo apt-get install vagrant
+
+3. Start Vagrant
+
+vagrant init
+vagrant up
